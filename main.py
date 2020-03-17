@@ -31,11 +31,11 @@ length_up_button = button(white, 265,screen_height+60,50,20,'+')
 length_down_button = button(white, 265,screen_height+120,50,20,'-')
 generate_arr_button = button(white, 400,screen_height+70,100,20,'Generate')
 stop_button = button(white, 400,screen_height+100,100,20,'Stop')
-bubble_sort_button = button(white,600,screen_height+40,100,20,'Bubble Sort')
-insert_sort_button = button(white,600,screen_height+70,100,20,'Insert Sort')
-choise_sort_button = button(white, 600,screen_height+100,100,20,'Choise Sort')
-
-
+bubble_sort_button = button(white,600,screen_height+40,130,20,'Bubble Sort')
+insert_sort_button = button(white,600,screen_height+70,130,20,'Insertion sort')
+choise_sort_button = button(white, 600,screen_height+100,130,20,'Selection sort')
+merge_sort_button = button(white, 800,screen_height+40,130,20,'Merge Sort')
+quick_sort_button = button(white, 800,screen_height+70,130,20,'Quick Sort')
 
 
 def massage_to_screen(msg, color, msg_width, msg_height):
@@ -66,8 +66,8 @@ def draw():
     stop_button.draw(screen)
     insert_sort_button.draw(screen)
     choise_sort_button.draw(screen)
- 
-
+    merge_sort_button.draw(screen)
+    #quick_sort_button.draw(screen)
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -89,6 +89,16 @@ def draw():
                 arr_colors =[white]*n
                 a = False
                 insert_sort(arr)
+
+            if merge_sort_button.isOver(pos):
+                arr_colors =[white]*n
+                a = False
+                merge_sort(arr,0,len(arr)-1)
+
+            if(quick_sort_button.isOver(pos)):
+                arr_colors =[white]*n
+                a = False
+                hoare_sort(arr)
 
             if stop_button.isOver(pos):
                 a = True
@@ -124,11 +134,7 @@ def draw():
                 arr = [randint(1, screen_height) for p in range(0, n)]
                 arr_sorted = sorted(arr)
                 arr_colors =[white]*n
-                
-                
-                
-               
-                
+                           
 def refill(): 
     screen.fill((0, 0, 0)) 
     draw() 
@@ -165,7 +171,6 @@ def insert_sort(arr):
                 arr_colors[i] = white
                 k-=1 
         
-
 def choise_sort(arr):
     for i in range (0, len(arr)-1):
         for j in range(i+1,len(arr)):
@@ -186,12 +191,53 @@ def choise_sort(arr):
                 arr_colors[j] = white
 
 
+def merge(arr, left, middle, rigth): 
+    
+    left2 = middle + 1
+
+    if (arr[middle] <= arr[left2]): 
+        return
+    
+    while (left <= middle and left2 <= rigth): 
+        if a: return
+        arr_colors[left] = blue
+        arr_colors[left2] = blue
+        
+        refill()
+        arr_colors[left] = white
+        arr_colors[left2] = white
+        
+        if (arr[left] <= arr[left2]): 
+            left += 1
+        else: 
+            value = arr[left2]
+            index = left2
+            
+            while (index != left): 
+                
+                arr[index] = arr[index - 1] 
+                
+                index -= 1 
+               
+            arr[left] = value
+            left += 1
+            middle += 1
+            left2 += 1
+	
+
+def merge_sort(arr, left, rigth): 
+    if (left < rigth): 
+        middle = left + (rigth - left) // 2
+        merge_sort(arr, left, middle)
+        merge_sort(arr, middle + 1, rigth) 
+        merge(arr, left, middle, rigth)
+		
+
+
 
 while run:
     
     screen.fill((0, 0, 0))
-   
     draw()
-   
     pygame.display.flip()
     clock.tick(fps)
