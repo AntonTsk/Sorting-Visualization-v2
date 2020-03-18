@@ -67,7 +67,7 @@ def draw():
     insert_sort_button.draw(screen)
     choise_sort_button.draw(screen)
     merge_sort_button.draw(screen)
-    #quick_sort_button.draw(screen)
+    quick_sort_button.draw(screen)
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -98,7 +98,7 @@ def draw():
             if(quick_sort_button.isOver(pos)):
                 arr_colors =[white]*n
                 a = False
-                hoare_sort(arr)
+                quick_sort(arr,0, len(arr)-1)
 
             if stop_button.isOver(pos):
                 a = True
@@ -163,6 +163,7 @@ def insert_sort(arr):
     for i in range(1, len(arr)):
         k = i 
         while k > 0 and arr[k-1] > arr[k]:
+                if a: return
                 arr_colors[k] = red
                 arr_colors[i] = blue
                 refill()
@@ -189,7 +190,6 @@ def choise_sort(arr):
                 refill()
                 arr_colors[i] = white
                 arr_colors[j] = white
-
 
 def merge(arr, left, middle, rigth): 
     
@@ -223,7 +223,6 @@ def merge(arr, left, middle, rigth):
             left += 1
             middle += 1
             left2 += 1
-	
 
 def merge_sort(arr, left, rigth): 
     if (left < rigth): 
@@ -232,6 +231,36 @@ def merge_sort(arr, left, rigth):
         merge_sort(arr, middle + 1, rigth) 
         merge(arr, left, middle, rigth)
 		
+def quick_sort(arr, left,rigth):
+    if(left<rigth):
+        p =  quick_partition(arr, left, rigth)
+        if p is None:return
+        quick_sort(arr,left,p-1)
+        quick_sort(arr,p+1,rigth)
+
+def quick_partition(arr, left, rigth):
+    pivot = arr[rigth] 
+    arr_colors[rigth] = green
+    i = left
+    for j in range(left, rigth):
+        if a: 
+            arr_colors[rigth] = white
+            return None
+        arr_colors[j] = blue
+        arr_colors[i] = blue
+
+        refill()
+        if arr[j] < pivot:
+            arr[i],arr[j] = arr[j], arr[i]
+            arr_colors[i] = white
+            i+=1
+        arr_colors[j] = white
+        arr_colors[i] = white
+        
+    
+    arr[i], arr[rigth] = arr[rigth], arr[i]
+    arr_colors[rigth] = white
+    return i 
 
 
 
