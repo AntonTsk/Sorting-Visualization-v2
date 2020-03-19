@@ -12,7 +12,7 @@ run = True
 y = screen_height 
 fps = 60
 speed = 100
-n = 20 #length of arr
+n = 100 #length of arr
 distance = screen_width/n
 width = distance - 1
 arr = [randint(1, screen_height) for p in range(0, n)]
@@ -36,6 +36,8 @@ insert_sort_button = button(white,600,screen_height+70,130,20,'Insertion sort')
 choise_sort_button = button(white, 600,screen_height+100,130,20,'Selection sort')
 merge_sort_button = button(white, 800,screen_height+40,130,20,'Merge Sort')
 quick_sort_button = button(white, 800,screen_height+70,130,20,'Quick Sort')
+heap_sort_button = button(white, 800,screen_height+100,130,20,'Heap Sort')
+
 
 
 def massage_to_screen(msg, color, msg_width, msg_height):
@@ -68,6 +70,8 @@ def draw():
     choise_sort_button.draw(screen)
     merge_sort_button.draw(screen)
     quick_sort_button.draw(screen)
+    heap_sort_button.draw(screen)
+
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -99,6 +103,10 @@ def draw():
                 arr_colors =[white]*n
                 a = False
                 quick_sort(arr,0, len(arr)-1)
+            if (heap_sort_button.isOver(pos)):
+                arr_colors =[white]*n
+                a = False
+                heap_sort(arr)
 
             if stop_button.isOver(pos):
                 a = True
@@ -230,7 +238,7 @@ def merge_sort(arr, left, rigth):
         merge_sort(arr, left, middle)
         merge_sort(arr, middle + 1, rigth) 
         merge(arr, left, middle, rigth)
-		
+
 def quick_sort(arr, left,rigth):
     if(left<rigth):
         p =  quick_partition(arr, left, rigth)
@@ -261,6 +269,49 @@ def quick_partition(arr, left, rigth):
     arr[i], arr[rigth] = arr[rigth], arr[i]
     arr_colors[rigth] = white
     return i 
+
+
+def heapify(arr, n,i):
+    
+    m = i
+    
+    left = 2*i +1
+    rigth = 2*i+2
+    if a: return
+    if left < n and arr[i] < arr[left]:
+        
+        m = left
+       
+        
+    if ( rigth <n and arr[m] < arr[rigth]):
+        
+        m = rigth
+        
+    if(m != i):
+        arr_colors[m] = blue
+        arr_colors[i] = blue
+        refill()
+        arr[i], arr[m] = arr[m], arr[i]
+        arr_colors[m] = white
+        arr_colors[i] = white
+        heapify(arr, n, m)
+
+
+def heap_sort(arr):
+    n = len(arr)
+    
+    for i in range(n,-1,-1):
+        if a: return
+        heapify(arr,n, i)
+
+    for i in range(n-1,0,-1):
+        if a: return
+        arr[i], arr[0] = arr[0],arr[i]
+       
+        heapify(arr,i, 0)
+
+
+
 
 
 
