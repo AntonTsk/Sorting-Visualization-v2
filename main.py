@@ -3,7 +3,7 @@ import sys
 from random import randint
 from button import *
 pygame.init()
-
+pygame.display.set_caption('Sorting Algorithm Visualization')
 screen_width, screen_height = 1024, 720
 screen = pygame.display.set_mode((screen_width, screen_height+180))
 clock = pygame.time.Clock()
@@ -22,9 +22,10 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 blue = (0, 0, 255)
 green = (0, 255, 0)
+black = (0, 0, 0)
 arr_colors =[white]*n
 a = False
-
+theme = 'Light'
 speed_up_button = button(white, 110,screen_height+60,50,20,'Up')
 speed_down_button = button(white, 110,screen_height+120,50,20,'Down')
 length_up_button = button(white, 265,screen_height+60,50,20,'+')
@@ -37,8 +38,7 @@ choise_sort_button = button(white, 600,screen_height+100,130,20,'Selection sort'
 merge_sort_button = button(white, 800,screen_height+40,130,20,'Merge Sort')
 quick_sort_button = button(white, 800,screen_height+70,130,20,'Quick Sort')
 heap_sort_button = button(white, 800,screen_height+100,130,20,'Heap Sort')
-
-
+theme_change_button = button(white, 0,screen_height+160,50,20,theme)
 
 def massage_to_screen(msg, color, msg_width, msg_height):
     screen_text = font.render(msg, True, color)
@@ -71,12 +71,12 @@ def draw():
     merge_sort_button.draw(screen)
     quick_sort_button.draw(screen)
     heap_sort_button.draw(screen)
-
-    
+ 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
         pos = pygame.mouse.get_pos()
+
         if event.type == pygame.MOUSEBUTTONDOWN:
 
             if bubble_sort_button.isOver(pos):
@@ -114,10 +114,10 @@ def draw():
             if speed_up_button.isOver(pos) and speed > 9:
                 speed -=10
 
-            if speed_down_button.isOver(pos) and speed<200:
+            if speed_down_button.isOver(pos) and speed<200 :
                 speed += 10
 
-            if length_up_button.isOver(pos) and n < 300:
+            if length_up_button.isOver(pos) and n < 300 :
                 a = True
                 n+=1
                 distance = screen_width/n
@@ -125,6 +125,7 @@ def draw():
                 arr = [randint(1, screen_height) for p in range(0, n)]
                 arr_sorted = sorted(arr)
                 arr_colors =[white]*n
+                
 
             if length_down_button.isOver(pos) and n > 2:
                 a = True
@@ -142,9 +143,9 @@ def draw():
                 arr = [randint(1, screen_height) for p in range(0, n)]
                 arr_sorted = sorted(arr)
                 arr_colors =[white]*n
-                           
+            
 def refill(): 
-    screen.fill((0, 0, 0)) 
+    screen.fill(black) 
     draw() 
     pygame.display.update() 
     pygame.time.wait(speed) 
@@ -270,7 +271,6 @@ def quick_partition(arr, left, rigth):
     arr_colors[rigth] = white
     return i 
 
-
 def heapify(arr, n,i):
     
     m = i
@@ -296,7 +296,6 @@ def heapify(arr, n,i):
         arr_colors[i] = white
         heapify(arr, n, m)
 
-
 def heap_sort(arr):
     n = len(arr)
     
@@ -310,14 +309,9 @@ def heap_sort(arr):
        
         heapify(arr,i, 0)
 
-
-
-
-
-
 while run:
     
-    screen.fill((0, 0, 0))
+    screen.fill(black)
     draw()
     pygame.display.flip()
     clock.tick(fps)
