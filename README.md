@@ -2,8 +2,8 @@
 Visualization of popular sorting algorithms using Python and Pygame.
 The project was created to visually show the operation of sorting algorithms, to compare the speed of the algorithms with large arrays. The project implemented popular sorting algorithms of varying complexity.
 
-Project available on my Github and you can run it online on repl.it:
-https://repl.it/@tonytskh/Sorting-Visualization
+Run it online:
+https://tonytskh.github.io/SortingVizualizer/
 
 Written in Python using the Pygame module. The main selection criterion was the availability of computer graphics. Pygame is a cross-platform set of Python modules and it includes computer graphics and sound libraries designed to be used with the Python programming.
 Implemented Merge Sort, Quick Sort, Heap Sort, Bubble Sort, Selection sort, Insertion sort.
