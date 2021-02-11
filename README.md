@@ -1,4 +1,4 @@
-# Sorting-Visualization
+# Sorting-Visualizer
 Visualization of popular sorting algorithms using Python and Pygame.
 The project was created to visually show the operation of sorting algorithms, to compare the speed of the algorithms with large arrays. The project implemented popular sorting algorithms of varying complexity.
 
